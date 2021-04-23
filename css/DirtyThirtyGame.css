@@ -1,0 +1,85 @@
+﻿body {
+}
+.container{
+   display:flex;
+   justify-content:center; 
+   align-items:center;
+}
+#dices{
+    height:260px;
+    clear:both;
+}
+#buttonsDiv{
+    /*margin-top:-50px;*/
+    height:100px;
+}
+.btnSection {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    margin: 18px auto;
+}
+.dicesBtns {
+    font-family: 'Langar', cursive;
+    width: 200px;
+    height: 75px;
+    margin: 10px auto;
+    font-size: x-large;
+    color: white;
+    background-color: hsla(228, 95%, 48%, 0.93);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 5px black;
+}
+.buttonUp {    
+    width: 200px;
+    height: 75px;   
+    color: white;
+    background-color: hsla(228, 95%, 48%, 0.93);    
+    box-shadow: 5px 5px 5px 5px black;
+}
+.buttonDn {    
+    width: 196px;
+    height: 71px;   
+    color: red;
+    background-color: hsl(227, 94%, 48%);
+    box-shadow: 2px 2px 3px 3px black;
+}
+.buttonHover {    
+    width: 198px;
+    height: 73px;
+    color: black;
+    background-color: hsla(228, 95%, 48%, 0.93);
+    box-shadow: 2px 2px 5px 5px black;
+}
+.display {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:250px;
+    width:200px;
+    margin: 10px;
+    border: 5px solid hsla(228, 95%, 48%, 0.93);
+    border-radius:20px;
+}
+#GoalDisplay{
+    
+}
+.numbers {
+    font-family: 'Langar', cursive;
+    font-size: 160px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+table{
+    max-height:400px;
+    width:1000px;
+    margin:5px;
+    margin-top:50px;
+}
+th, td {
+    font-family: 'Langar', cursive;
+    font-size: 60px;
+    text-align: center;
+}
