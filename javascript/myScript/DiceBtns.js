@@ -35,6 +35,7 @@ function ShakeBtnMaker() {
     document.getElementById("ShakeButton").append(div);
 }
 
+
 function GoalButtonMaker() {
     var GoalBtn = document.createElement("div");
     $(GoalBtn).attr({ class: "display", id: "GoalDisplay" });

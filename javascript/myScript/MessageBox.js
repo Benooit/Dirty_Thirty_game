@@ -8,14 +8,14 @@ var green = "hsla(120, 100%, 90%, 0.77)";
 var blue = "hsla(235, 100%, 49%, 0.77)";
 var yellow = "hsla(60, 100%, 70%, 0.77)";
 var red = "hsla(0, 100%, 50%, 0.77)";
-var msg = "Bonjour, appuyer sur GO pour commencer !";
+var msg = "Bonjour, appuyer sur commencer pour commencer une partie !";
     var msgSpan = document.createElement("span");
     var msgBox = document.createElement("div");
 
 
 function MsgBoxMaker() {
     $(msgBox).attr("class", "container");
-    $(msgBox).width("75%");
+    $(msgBox).width("85%");
     $(msgBox).height(75);
     $(msgBox).css({ "background-color": blue, "margin-top": "20px", "border-radius": "20px" });
     $(msgSpan).css({"font-family":"'Langar', cursive", "font-size":"xx-large"});
