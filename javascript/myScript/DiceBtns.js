@@ -17,7 +17,7 @@ function DiceButtonMaker(buttonQty) {
     for (let i = 1; i <= buttonQty; i++) {
         var btnSection = document.createElement("section");
         $(btnSection).attr({ class: "btnSection" });
-        var button = $('<input/>').attr({ type: 'button', name: 'Button_'+i, id:'Btn_'+i,  class: 'dicesBtns buttonUp', value: 'KEEP' });
+        var button = $('<input/>').attr({ type: 'button', name: 'Button_'+i, id:'Btn_'+i,  class: 'buttons buttonUp', value: 'KEEP' });
         $(button).attr("data-frozen", false);      
         AttachDiceButtonEvent(button);
         $(btnSection).append(button);
@@ -29,7 +29,7 @@ function ShakeBtnMaker() {
     var div = document.createElement("div");
     div.className = "container";
     var shakeBtn = document.createElement("input");//$('<input/>').attr({ type: 'button', name: 'Shake_Btn', id: 'ShakeBtn', class: 'buttonUp', value: 'SHAKE' });
-    $(shakeBtn).attr({ type: 'button', name: 'Shake_Btn', id: 'ShakeBtn', class: 'dicesBtns', value: 'GO' });
+    $(shakeBtn).attr({ type: 'button', name: 'Shake_Btn', id: 'ShakeBtn', class: 'buttons buttonUp', value: 'GO' });
     AttachShakeBtnEvent(shakeBtn);
     div.append(shakeBtn);
     document.getElementById("ShakeButton").append(div);
@@ -85,6 +85,10 @@ function AttachShakeBtnEvent(shakeBtn) {
             Shake();
         }
     });
+    $(shakeBtn).hover(
+        function () { $(this).addClass('buttonHover') },
+        function () { $(this).removeClass('buttonHover') }
+    );
     
 }
 

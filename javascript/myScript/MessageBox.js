@@ -16,8 +16,8 @@ var msg = "Bonjour, appuyer sur GO pour commencer !";
 function MsgBoxMaker() {
     $(msgBox).attr("class", "container");
     $(msgBox).width("75%");
-    $(msgBox).height(100);
-    $(msgBox).css({ "background-color": blue, "margin-top": "30px", "border-radius": "20px" });
+    $(msgBox).height(75);
+    $(msgBox).css({ "background-color": blue, "margin-top": "20px", "border-radius": "20px" });
     $(msgSpan).css({"font-family":"'Langar', cursive", "font-size":"xx-large"});
     $(msgBox).append(msgSpan);
     $("#MessageBox").append(msgBox);

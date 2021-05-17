@@ -6,47 +6,46 @@
    align-items:center;
 }
 #dices{
-    height:260px;
+    height:140px;
     clear:both;
 }
 #buttonsDiv{
     /*margin-top:-50px;*/
-    height:100px;
+    height:75px;
 }
 .btnSection {
-    width: 200px;
-    height: 100px;
-    position: relative;
-    margin: 18px auto;
-}
-.dicesBtns {
-    font-family: 'Langar', cursive;
-    width: 200px;
+    width: 165px;
     height: 75px;
-    margin: 10px auto;
-    font-size: x-large;
+    position: relative;
+    margin:  auto;
+}
+.buttonUp {
+   
+    width: 160px;
+    height: 50px;
+    
     color: white;
     background-color: hsla(228, 95%, 48%, 0.93);
+    
+    box-shadow: 5px 5px 5px 5px black;
+}
+.buttons{
+    font-family: 'Langar', cursive;
+    margin: auto;
+    font-size: x-large;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px 5px black;
 }
-.buttonUp {    
-    width: 200px;
-    height: 75px;   
-    color: white;
-    background-color: hsla(228, 95%, 48%, 0.93);    
-    box-shadow: 5px 5px 5px 5px black;
-}
+
 .buttonDn {    
-    width: 196px;
-    height: 71px;   
+    width: 155px;
+    height: 44px;   
     color: red;
     background-color: hsl(227, 94%, 48%);
     box-shadow: 2px 2px 3px 3px black;
 }
 .buttonHover {    
-    width: 198px;
-    height: 73px;
+    /* width: 198px;
+    height: 73px; */
     color: black;
     background-color: hsla(228, 95%, 48%, 0.93);
     box-shadow: 2px 2px 5px 5px black;
@@ -76,10 +75,21 @@ table{
     max-height:400px;
     width:1000px;
     margin:5px;
-    margin-top:50px;
+    margin-top:25px;
+    border-radius:20px;
 }
 th, td {
     font-family: 'Langar', cursive;
-    font-size: 60px;
+    font-size: 45px;
     text-align: center;
+}
+.top_left_cell{
+    border-top-left-radius:18px;
+}
+.top_right_cell{
+    border-top-right-radius: 18px;
+}
+.buttom_cell{
+    border-bottom-left-radius:18px;
+    border-bottom-right-radius:18px;
 }

@@ -29,7 +29,6 @@ function AreAllAnimFinished() {
         DiceAnimOver();
         alert("all anim finished !");
     }
-
 }
 
 function FillShakeBag() {
