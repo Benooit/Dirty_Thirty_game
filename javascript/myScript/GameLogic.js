@@ -27,7 +27,7 @@ function AreAllAnimFinished() {
     if (++finishedAnim == shakeBag.length) {
         finishedAnim = 0;
         DiceAnimOver();
-        alert("all anim finished !");
+        console.log("all dices animations finished !");
     }
 }
 
