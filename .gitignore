@@ -5,6 +5,7 @@
 
 #My own ignored files...
 *.orig
+dependance/
 
 # User-specific files
 *.rsuser
