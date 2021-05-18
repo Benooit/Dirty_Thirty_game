@@ -19,7 +19,7 @@ var keepOneDiceNotice_msg = {msg:"Vous devez conserver au moins 1 dé !",color:r
 var keepOneAndGo_msg = {msg:"Conserver au moins 1 dé et brasser !",color:blue};
 var endOfTurn_msg = {msg:"Vous avez terminer votre tour !",color:yellow};
 var shakeAllDices_msg = {msg:"Vous devez brasser TOUTES les dés !",color:red};
-
+var pointsToSteel_msg = {msg:"Voux pouvez dérober ",color:yellow,input:0}
 
 let msgSpan = document.createElement("span");
 let msgBox = document.createElement("div");
@@ -41,13 +41,19 @@ function MsgBoxMaker() {
 function Msg(msg) { 
     $(msgDiv).slideUp(500, function () {
 
-        while (msgDiv.childNodes.length>1) {
+        while (msgDiv.childNodes.length>1) {//cleanup of numBox and goal numbers after the message span.
             msgDiv.removeChild(msgDiv.lastChild);
         }
+
+        if (parseInt(msg.input)) {
+            msg.msg += msg.input +(((parseInt(msg.input))>1)?" points":" point")  + "  à votre adversaire !";
+        }
+
         if (msg.input=="numbox") {
             numberBox.value = 0;
             $(msgDiv).append(numberBox);
         }
+
         msgSpan.textContent = msg.msg; 
     });   
 

@@ -5,7 +5,7 @@ $(document).ready(function () {
     //alert(buttonQty);
     DiceButtonMaker(buttonQty);
     ShakeBtnMaker();
-    GoalButtonMaker();
+    //GoalButtonMaker();
 
     //var divVal = document.getElementById("Goal");
     //divVal.setAttribute("data-value", 4);

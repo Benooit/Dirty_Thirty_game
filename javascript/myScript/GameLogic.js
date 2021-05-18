@@ -113,14 +113,14 @@ function Shake() {//Shake each cube in shakeBag then reset btns and refill shake
                 
                 if (shotCnt == 0) {//after the first time dice are mixed                      
                     
-                    setTimeout(function () {
-                        Msg(lastCall_msg);/////////////////
-                    },5);
+                   
+                        Msg(lastCall_msg);//setTimeout(function ()...enlevé
+                    
                 }
                 else if(frozenBag.length != (dices.length - 1)){
-                    setTimeout(function () {
-                        Msg(keepOneAndGo_msg);////////////////////////////////
-                    }, 5000);                    
+                    
+                        Msg(keepOneAndGo_msg);//setTimeout(function ()...enlevé
+                                   
                 }
                 
                 shotCnt++;
@@ -160,9 +160,9 @@ function ValidatePtsToRemove(){
 function RemovedPts(ptsToRemove){ 
     let pts = $('#Pts').text();
     $('#Pts').text(pts-ptsToRemove);
- }
+}
 
-function FinalMove(){
+function Reset(){
     ResetButtons();
     ReFillShakeBag();//Fully refill the shakeBag after a single shake.......
     shotCnt = 0;
@@ -171,18 +171,47 @@ function FinalMove(){
     gameCnt++;
     $("#GoalNbr").attr("data-frozen", false);
     $('#ShakeBtn').val("continuer");
+}
 
+function FinalMove(){
     let pts = $('#Pts').text();
-    if (pts) {
-        
+    let dicesTotal = $("#Total").text();
+    let goalScore = parseInt($("#Goalscore").text());
+    switch (goalScore) {
+        case 12:
+            if (dicesTotal>=12) {
+                $('#Pts').text(pts-(dicesTotal-12));
+                Msg(endOfTurn_msg);
+            }
+            else if(dicesTotal<12){
+                //dummi code to make the game playable...
+                pointsToSteel_msg.input = 12-dicesTotal;   
+                Msg(pointsToSteel_msg);             
+            }
+
+            break;
+        case 30:
+            if (dicesTotal<=30) {
+                $('#Pts').text(pts-(30-dicesTotal));
+                Msg(endOfTurn_msg);
+            }
+            else if(dicesTotal>30){
+                //dummi code to make the game playable...
+                pointsToSteel_msg.input = dicesTotal-30;
+                Msg(pointsToSteel_msg);                
+            }
+            break;
+        default:
+            console.log("goalScore not valid in FinalMove()")
+            break;
     }
-   
+    Reset();
 }
 
 function DiceAnimOver() {    
     DisplayValues();
     if (frozenBag.length == (dices.length - 1) || (shakeBag.length < 1) ) {//there to wait the animation.
-        setTimeout(function () { Msg(endOfTurn_msg); FinalMove(); }, 1);///////////
+          FinalMove();
     }
     $(".dicesBtns").attr("data-frozen", false);    
 }
