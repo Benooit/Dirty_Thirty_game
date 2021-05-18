@@ -1,5 +1,9 @@
 ﻿body {
 }
+#ptsToRemove :focus{
+        
+    
+}
 .container{
    display:flex;
    justify-content:center; 

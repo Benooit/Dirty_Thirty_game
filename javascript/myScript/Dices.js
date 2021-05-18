@@ -10,6 +10,7 @@ $(document).ready(() => {
 
     const diceQty = 6;//Quantity of dices to be produce. 
     const animFinished = new Event('diceAnimFinished');
+    const animStarted = new Event('diceAnimStarted');
 
 function DiceMaker(diceQty) {
 
@@ -42,6 +43,7 @@ function DiceMaker(diceQty) {
             cubeDiv.setAttribute("data-inTransition", false);
             
             cubeDiv.addEventListener("transitionend", () => { document.dispatchEvent(animFinished); }, true);
+            cubeDiv.addEventListener("transitionstart", () => { document.dispatchEvent(animStarted); }, true);
             diceSection.append(cubeDiv);
             $("#dices").append(diceSection);//insert the diceSections in your div/section of choice to append all dices. 
         }

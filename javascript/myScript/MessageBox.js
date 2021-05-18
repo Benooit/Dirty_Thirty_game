@@ -4,32 +4,84 @@ $(document).ready(() => {
     MsgBoxMaker();
 });
 
-var green = "hsla(120, 100%, 90%, 0.77)";
-var blue = "hsla(235, 100%, 49%, 0.77)";
-var yellow = "hsla(60, 100%, 70%, 0.77)";
-var red = "hsla(0, 100%, 50%, 0.77)";
-var msg = "Bonjour, appuyer sur commencer pour commencer une partie !";
-    var msgSpan = document.createElement("span");
-    var msgBox = document.createElement("div");
+let green = "hsla(120, 100%, 90%, 0.77)";
+let blue = "hsla(235, 100%, 49%, 0.77)";
+let yellow = "hsla(60, 100%, 70%, 0.77)";
+let red = "hsla(0, 100%, 50%, 0.77)";
+let numberBox = document.createElement("input");
+    $(numberBox).attr({ type: 'number', name: 'ptsToRemove_box', id: 'ptsToRemove_box', class: 'NumBox' ,min:0,max:36});
+    $(numberBox).css({"height":"45px","width":"50px","font-family":"'Langar', cursive", "font-size":"xx-large", "margin-left": "20px", "border-radius": "10px"});
 
+var welcome_msg = {msg:"Bonjour, appuyer sur commencer pour commencer une partie !",color:blue};
+var removedPts_msg = {msg:"Entrez le nombre de points à soustraire !",color:green,input:"numbox"};
+var lastCall_msg = {msg:"Choisissez votre mise !",color:yellow,input:"goal"};
+var keepOneDiceNotice_msg = {msg:"Vous devez conserver au moins 1 dé !",color:red};
+var keepOneAndGo_msg = {msg:"Conserver au moins 1 dé et brasser !",color:blue};
+var endOfTurn_msg = {msg:"Vous avez terminer votre tour !",color:yellow};
+var shakeAllDices_msg = {msg:"Vous devez brasser TOUTES les dés !",color:red};
+var pointsToSteel_msg = {msg:"Voux pouvez dérober ",color:yellow,input:0}
 
+let msgSpan = document.createElement("span");
+let msgBox = document.createElement("div");
+let msgDiv = document.createElement("div");
 function MsgBoxMaker() {
     $(msgBox).attr("class", "container");
     $(msgBox).width("85%");
     $(msgBox).height(75);
     $(msgBox).css({ "background-color": blue, "margin-top": "20px", "border-radius": "20px" });
     $(msgSpan).css({"font-family":"'Langar', cursive", "font-size":"xx-large"});
-    $(msgBox).append(msgSpan);
+    $(msgDiv).append(msgSpan);
+    $(msgBox).append(msgDiv);
     $("#MessageBox").append(msgBox);
 
-    Msg(msg, "blue");
+    Msg(welcome_msg);
+
 }
 
-function Msg(msg, color) {//toute a changer
-    $(msgSpan).slideUp(500, function () {msgSpan.textContent = msg; });    
-    $(msgSpan).slideDown(500, function () { $(msgBox).css("background-color", ColorPicking(color)); });
-    
+function Msg(msg) { 
+    $(msgDiv).slideUp(500, function () {
+
+        while (msgDiv.childNodes.length>1) {//cleanup of numBox and goal numbers after the message span.
+            msgDiv.removeChild(msgDiv.lastChild);
+        }
+
+        if (parseInt(msg.input)) {
+            msg.msg += msg.input +(((parseInt(msg.input))>1)?" points":" point")  + "  à votre adversaire !";
+        }
+
+        if (msg.input=="numbox") {
+            numberBox.value = 0;
+            $(msgDiv).append(numberBox);
+        }
+
+        msgSpan.textContent = msg.msg; 
+    });   
+
+    $(msgDiv).slideDown(500, function () { 
+
+        $(msgBox).css("background-color", msg.color); 
+        
+        
+    });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function ColorPicking(colorStr) {// a éléminer
     switch (colorStr) {

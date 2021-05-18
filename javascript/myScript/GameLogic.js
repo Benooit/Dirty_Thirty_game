@@ -5,13 +5,18 @@ $(document).ready(() => {
     document.addEventListener('diceAnimFinished', () => {
         AreAllAnimFinished();
     });
+    document.addEventListener('diceAnimStarted', () => {
+        StartedAnim++;
+    });
     $('#ShakeBtn').val("commencer");
 });
 //VERY IMPORTANT to be accessible from another .js file 
 //the function need to be outside $(document).ready. 
 //Also need to be after $(document).ready block because everything inside 
 //the $(document).ready block won't work.
+let ptsRemovalChk = false;
 let finishedAnim = 0;
+let StartedAnim = 0;
 var gameCnt = 0;
 var PtsTotal = 0;
 var shotTotal = 0;
@@ -25,10 +30,10 @@ dices = document.getElementsByClassName("cube");
 
 function AreAllAnimFinished() {
     
-    if (++finishedAnim == shakeBag.length) {
+    if (++finishedAnim == StartedAnim) {
         finishedAnim = 0;
+        StartedAnim = 0;
         DiceAnimOver();
-        console.log("all dices animations finished !");
     }
 }
 
@@ -73,7 +78,7 @@ function removeFromShakeBag(cube) {//...id is received...object is spliced...
     }
     else {
         //alert("Vous devez brasser TOUTES les dés !");
-        Msg("Vous devez brasser TOUTES les dés !", "red");///////////////
+        Msg(shakeAllDices_msg);///////////////
         return false;
     }
 }
@@ -89,7 +94,13 @@ function Freeze() {
     else { return false; }    
 }
 function Shake() {//Shake each cube in shakeBag then reset btns and refill shakeBag.
+    
     if (!turnStart) {
+        if (!ptsRemovalChk) {
+            ValidatePtsToRemove();
+            Shake();
+            return;
+        }
         
         if (Freeze() || shotCnt < 1) {//if you have 1 or more dices to freeze else you should be at your first shot.
             
@@ -98,62 +109,113 @@ function Shake() {//Shake each cube in shakeBag then reset btns and refill shake
             if (shakeBag.length > 0) {//if there are dices to be shaken...
                 for (cube of shakeBag) {
                     cube.setAttribute("data-value", Shaker(cube)); //shaking to dice cube return it's value.       
-                }
+                }                
                 
-                shotCnt++;                
-                
-                if (shotCnt == 1) {//after the first time dice are mixed                   
-                    setTimeout(function () {
-                        Msg("Après ce coup vous ne pouvez plus changer votre mise !", "yellow");/////////////////
-                    },5000);
+                if (shotCnt == 0) {//after the first time dice are mixed                      
+                    
+                   
+                        Msg(lastCall_msg);//setTimeout(function ()...enlevé
+                    
                 }
                 else if(frozenBag.length != (dices.length - 1)){
-                    setTimeout(function () {
-                        Msg("Conservez au moins 1 dé et appuyez sur GO !", "green");////////////////////////////////
-                    }, 5000);                    
+                    
+                        Msg(keepOneAndGo_msg);//setTimeout(function ()...enlevé
+                                   
                 }
+                
+                shotCnt++;
+
                 $('#ShakeBtn').val("Brasser");
                 
                 if (shotCnt > 1) { $("#GoalNbr").attr("data-frozen", true); }//block the goal number after first draw.
             }
             else {//all dices are frozed 
                 DiceAnimOver();               
-            }
-            
+            }            
         }
         else {
-            Msg("Vous devez conserver au moins 1 dé !", "red");//////////////
-        }
-        
+            Msg(keepOneDiceNotice_msg);//////////////
+        }        
     }
     else {
-        Msg("Entrez le nombre de points à soustraire !", "green");//////////////
-        $('#ShakeBtn').val("Entrer");
-        turnStart = false;//first shot of this round is over.
-    }
-    
+        
+        Msg(removedPts_msg);//////////////
+        $('#ShakeBtn').val("Entrer");        
+        turnStart = false//have to update comments..
+    }    
 }
-function FinalMove(){
+
+function ValidatePtsToRemove(){
+    var valToCheck = $("#ptsToRemove_box").val()
+    if(valToCheck>36||valToCheck<0) {          
+        ptsRemovalChk = false;
+        turnStart = true;
+    }
+    else{
+        ptsRemovalChk = true;
+        RemovedPts($("#ptsToRemove_box").val())
+    }
+}
+
+function RemovedPts(ptsToRemove){ 
+    let pts = $('#Pts').text();
+    $('#Pts').text(pts-ptsToRemove);
+}
+
+function Reset(){
     ResetButtons();
     ReFillShakeBag();//Fully refill the shakeBag after a single shake.......
     shotCnt = 0;
+    ptsRemovalChk = false;
     turnStart = true;
     gameCnt++;
     $("#GoalNbr").attr("data-frozen", false);
     $('#ShakeBtn').val("continuer");
 }
 
-function DiceAnimOver() {
-    
+function FinalMove(){
+    let pts = $('#Pts').text();
+    let dicesTotal = $("#Total").text();
+    let goalScore = parseInt($("#Goalscore").text());
+    switch (goalScore) {
+        case 12:
+            if (dicesTotal>=12) {
+                $('#Pts').text(pts-(dicesTotal-12));
+                Msg(endOfTurn_msg);
+            }
+            else if(dicesTotal<12){
+                //dummi code to make the game playable...
+                pointsToSteel_msg.input = 12-dicesTotal;   
+                Msg(pointsToSteel_msg);             
+            }
+
+            break;
+        case 30:
+            if (dicesTotal<=30) {
+                $('#Pts').text(pts-(30-dicesTotal));
+                Msg(endOfTurn_msg);
+            }
+            else if(dicesTotal>30){
+                //dummi code to make the game playable...
+                pointsToSteel_msg.input = dicesTotal-30;
+                Msg(pointsToSteel_msg);                
+            }
+            break;
+        default:
+            console.log("goalScore not valid in FinalMove()")
+            break;
+    }
+    Reset();
+}
+
+function DiceAnimOver() {    
     DisplayValues();
     if (frozenBag.length == (dices.length - 1) || (shakeBag.length < 1) ) {//there to wait the animation.
-        //setTimeout(function () { alert("Finiiiiiiiiiiiiiiiiiiiiiiiii"); FinalMove(); }, 1000);
-        setTimeout(function () { Msg("Finiiiiiiiiiiiiiiiiiiiiiiiii", "yellow"); FinalMove(); }, 1);///////////
+          FinalMove();
     }
-    $(".dicesBtns").attr("data-frozen", false);
-    
-    
+    $(".dicesBtns").attr("data-frozen", false);    
 }
+
 function DisplayValues() {//calculate the sum of all dices values and show them in total.
     shotTotal = 0;
     for (let i = 0; i < dices.length; i++) {
