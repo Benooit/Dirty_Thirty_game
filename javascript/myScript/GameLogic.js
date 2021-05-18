@@ -11,6 +11,7 @@ $(document).ready(() => {
 //the function need to be outside $(document).ready. 
 //Also need to be after $(document).ready block because everything inside 
 //the $(document).ready block won't work.
+
 let finishedAnim = 0;
 var gameCnt = 0;
 var PtsTotal = 0;
@@ -73,7 +74,7 @@ function removeFromShakeBag(cube) {//...id is received...object is spliced...
     }
     else {
         //alert("Vous devez brasser TOUTES les dés !");
-        Msg("Vous devez brasser TOUTES les dés !", "red");///////////////
+        Msg(shakeAllDices_msg);///////////////
         return false;
     }
 }
@@ -89,6 +90,7 @@ function Freeze() {
     else { return false; }    
 }
 function Shake() {//Shake each cube in shakeBag then reset btns and refill shakeBag.
+    
     if (!turnStart) {
         
         if (Freeze() || shotCnt < 1) {//if you have 1 or more dices to freeze else you should be at your first shot.
@@ -98,41 +100,53 @@ function Shake() {//Shake each cube in shakeBag then reset btns and refill shake
             if (shakeBag.length > 0) {//if there are dices to be shaken...
                 for (cube of shakeBag) {
                     cube.setAttribute("data-value", Shaker(cube)); //shaking to dice cube return it's value.       
-                }
+                }                
                 
-                shotCnt++;                
-                
-                if (shotCnt == 1) {//after the first time dice are mixed                   
+                if (shotCnt == 0) {//after the first time dice are mixed                      
+                    
                     setTimeout(function () {
-                        Msg("Après ce coup vous ne pouvez plus changer votre mise !", "yellow");/////////////////
+                        Msg(lastCall_msg);/////////////////
                     },5000);
                 }
                 else if(frozenBag.length != (dices.length - 1)){
                     setTimeout(function () {
-                        Msg("Conservez au moins 1 dé et appuyez sur GO !", "green");////////////////////////////////
+                        Msg(keepOneAndGo_msg);////////////////////////////////
                     }, 5000);                    
                 }
+                
+                shotCnt++;
+
                 $('#ShakeBtn').val("Brasser");
                 
                 if (shotCnt > 1) { $("#GoalNbr").attr("data-frozen", true); }//block the goal number after first draw.
             }
             else {//all dices are frozed 
                 DiceAnimOver();               
-            }
-            
+            }            
         }
         else {
-            Msg("Vous devez conserver au moins 1 dé !", "red");//////////////
-        }
-        
+            Msg(keepOneDiceNotice_msg);//////////////
+        }        
     }
     else {
-        Msg("Entrez le nombre de points à soustraire !", "green");//////////////
-        $('#ShakeBtn').val("Entrer");
-        turnStart = false;//first shot of this round is over.
+        Msg(removedPts_msg);//////////////
+        $('#ShakeBtn').val("Entrer");        
+        turnStart = false//have to update comments..
     }
     
 }
+
+function RecordGoalScore(){
+    var valToCheck = $("#Goalscore").text($("#ptsToRemove_box").val());
+
+    if(valToCheck>36||valToCheck<0) {          
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function FinalMove(){
     ResetButtons();
     ReFillShakeBag();//Fully refill the shakeBag after a single shake.......
@@ -147,8 +161,7 @@ function DiceAnimOver() {
     
     DisplayValues();
     if (frozenBag.length == (dices.length - 1) || (shakeBag.length < 1) ) {//there to wait the animation.
-        //setTimeout(function () { alert("Finiiiiiiiiiiiiiiiiiiiiiiiii"); FinalMove(); }, 1000);
-        setTimeout(function () { Msg("Finiiiiiiiiiiiiiiiiiiiiiiiii", "yellow"); FinalMove(); }, 1);///////////
+        setTimeout(function () { Msg(endOfTurn_msg); FinalMove(); }, 1);///////////
     }
     $(".dicesBtns").attr("data-frozen", false);
     
