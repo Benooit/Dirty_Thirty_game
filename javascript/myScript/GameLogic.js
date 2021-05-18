@@ -5,14 +5,18 @@ $(document).ready(() => {
     document.addEventListener('diceAnimFinished', () => {
         AreAllAnimFinished();
     });
+    document.addEventListener('diceAnimStarted', () => {
+        StartedAnim++;
+    });
     $('#ShakeBtn').val("commencer");
 });
 //VERY IMPORTANT to be accessible from another .js file 
 //the function need to be outside $(document).ready. 
 //Also need to be after $(document).ready block because everything inside 
 //the $(document).ready block won't work.
-
+let ptsRemovalChk = false;
 let finishedAnim = 0;
+let StartedAnim = 0;
 var gameCnt = 0;
 var PtsTotal = 0;
 var shotTotal = 0;
@@ -26,10 +30,10 @@ dices = document.getElementsByClassName("cube");
 
 function AreAllAnimFinished() {
     
-    if (++finishedAnim == shakeBag.length) {
+    if (++finishedAnim == StartedAnim) {
         finishedAnim = 0;
+        StartedAnim = 0;
         DiceAnimOver();
-        console.log("all dices animations finished !");
     }
 }
 
@@ -92,6 +96,11 @@ function Freeze() {
 function Shake() {//Shake each cube in shakeBag then reset btns and refill shakeBag.
     
     if (!turnStart) {
+        if (!ptsRemovalChk) {
+            ValidatePtsToRemove();
+            Shake();
+            return;
+        }
         
         if (Freeze() || shotCnt < 1) {//if you have 1 or more dices to freeze else you should be at your first shot.
             
@@ -106,7 +115,7 @@ function Shake() {//Shake each cube in shakeBag then reset btns and refill shake
                     
                     setTimeout(function () {
                         Msg(lastCall_msg);/////////////////
-                    },5000);
+                    },5);
                 }
                 else if(frozenBag.length != (dices.length - 1)){
                     setTimeout(function () {
@@ -129,44 +138,55 @@ function Shake() {//Shake each cube in shakeBag then reset btns and refill shake
         }        
     }
     else {
+        
         Msg(removedPts_msg);//////////////
         $('#ShakeBtn').val("Entrer");        
         turnStart = false//have to update comments..
-    }
-    
+    }    
 }
 
-function RecordGoalScore(){
-    var valToCheck = $("#Goalscore").text($("#ptsToRemove_box").val());
-
+function ValidatePtsToRemove(){
+    var valToCheck = $("#ptsToRemove_box").val()
     if(valToCheck>36||valToCheck<0) {          
-        return true;
+        ptsRemovalChk = false;
+        turnStart = true;
     }
     else{
-        return false;
+        ptsRemovalChk = true;
+        RemovedPts($("#ptsToRemove_box").val())
     }
 }
+
+function RemovedPts(ptsToRemove){ 
+    let pts = $('#Pts').text();
+    $('#Pts').text(pts-ptsToRemove);
+ }
 
 function FinalMove(){
     ResetButtons();
     ReFillShakeBag();//Fully refill the shakeBag after a single shake.......
     shotCnt = 0;
+    ptsRemovalChk = false;
     turnStart = true;
     gameCnt++;
     $("#GoalNbr").attr("data-frozen", false);
     $('#ShakeBtn').val("continuer");
+
+    let pts = $('#Pts').text();
+    if (pts) {
+        
+    }
+   
 }
 
-function DiceAnimOver() {
-    
+function DiceAnimOver() {    
     DisplayValues();
     if (frozenBag.length == (dices.length - 1) || (shakeBag.length < 1) ) {//there to wait the animation.
         setTimeout(function () { Msg(endOfTurn_msg); FinalMove(); }, 1);///////////
     }
-    $(".dicesBtns").attr("data-frozen", false);
-    
-    
+    $(".dicesBtns").attr("data-frozen", false);    
 }
+
 function DisplayValues() {//calculate the sum of all dices values and show them in total.
     shotTotal = 0;
     for (let i = 0; i < dices.length; i++) {
