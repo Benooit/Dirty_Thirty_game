@@ -19,7 +19,6 @@ let finishedAnim = 0;
 let StartedAnim = 0;
 var gameCnt = 0;
 var PtsTotal = 0;
-var shotTotal = 0;
 var shotCnt = 0;
 var shakeBag = [];//Bag That contains the dices to be shaken.
 var toBeFrozed = [];//contains the dices to be saved.
@@ -107,27 +106,22 @@ function Shake() {//Shake each cube in shakeBag then reset btns and refill shake
             $(".dicesBtns").attr("data-frozen", true);//to freeze the Keep buttons while dices are animated. 
             
             if (shakeBag.length > 0) {//if there are dices to be shaken...
+
                 for (cube of shakeBag) {
                     cube.setAttribute("data-value", Shaker(cube)); //shaking to dice cube return it's value.       
                 }                
                 
-                if (shotCnt == 0) {//after the first time dice are mixed                      
-                    
-                   
+                if (shotCnt == 0) {//after the first time dice are mixed   
                         Msg(lastCall_msg);//setTimeout(function ()...enlevé
-                    
                 }
                 else if(frozenBag.length != (dices.length - 1)){
-                    
-                        Msg(keepOneAndGo_msg);//setTimeout(function ()...enlevé
-                                   
+                        Msg(keepOneAndGo_msg);//setTimeout(function ()...enlevé                                   
                 }
                 
                 shotCnt++;
 
-                $('#ShakeBtn').val("Brasser");
+                $('#ShakeBtn').val("Brasser");             
                 
-                if (shotCnt > 1) { $("#GoalNbr").attr("data-frozen", true); }//block the goal number after first draw.
             }
             else {//all dices are frozed 
                 DiceAnimOver();               
@@ -137,8 +131,7 @@ function Shake() {//Shake each cube in shakeBag then reset btns and refill shake
             Msg(keepOneDiceNotice_msg);//////////////
         }        
     }
-    else {
-        
+    else {        
         Msg(removedPts_msg);//////////////
         $('#ShakeBtn').val("Entrer");        
         turnStart = false//have to update comments..
@@ -176,8 +169,8 @@ function Reset(){
 function FinalMove(){
     let pts = $('#Pts').text();
     let dicesTotal = $("#Total").text();
-    let goalScore = parseInt($("#Goalscore").text());
-    switch (goalScore) {
+    let goalScore = $("#Goalscore").attr("data-value");
+    switch ((parseInt(goalScore))) {
         case 12:
             if (dicesTotal>=12) {
                 $('#Pts').text(pts-(dicesTotal-12));
@@ -188,7 +181,6 @@ function FinalMove(){
                 pointsToSteel_msg.input = 12-dicesTotal;   
                 Msg(pointsToSteel_msg);             
             }
-
             break;
         case 30:
             if (dicesTotal<=30) {
@@ -217,9 +209,9 @@ function DiceAnimOver() {
 }
 
 function DisplayValues() {//calculate the sum of all dices values and show them in total.
-    shotTotal = 0;
+    let dicesTotal = 0;
     for (let i = 0; i < dices.length; i++) {
-        shotTotal += parseInt($("#cube_"+(i + 1)).attr("data-value"));
+        dicesTotal += parseInt($("#cube_"+(i + 1)).attr("data-value"));
     }   
-    $("#Total").text(shotTotal);
+    $("#Total").text(dicesTotal);
 }
