@@ -42,8 +42,8 @@ function DiceMaker(diceQty) {
             cubeDiv.setAttribute("data-frozen", false);
             cubeDiv.setAttribute("data-inTransition", false);
             
-            cubeDiv.addEventListener("transitionend", () => { document.dispatchEvent(animFinished); }, true);
-            cubeDiv.addEventListener("transitionstart", () => { document.dispatchEvent(animStarted); }, true);
+            cubeDiv.addEventListener("transitionstart", () => { document.dispatchEvent(animStarted); console.log("transitionstart for cube_"+i); }, true);
+            cubeDiv.addEventListener("transitionend", () => { document.dispatchEvent(animFinished); console.log("transitionend for cube_"+i);}, true);
             diceSection.append(cubeDiv);
             $("#dices").append(diceSection);//insert the diceSections in your div/section of choice to append all dices. 
         }
