@@ -65,7 +65,7 @@ function AttachDiceButtonEvent(button) {
 
 function AttachShakeBtnEvent(shakeBtn) {
     $(shakeBtn).click(function () {
-        if (true) {
+        if (true) {///---------condition to implement ! (should be lock wile noticing)
             Shake();
         }
     });

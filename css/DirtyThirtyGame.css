@@ -84,7 +84,7 @@ table{
 }
 th, td {
     font-family: 'Langar', cursive;
-    font-size: 45px;
+    font-size: 40px;
     text-align: center;
 }
 .top_left_cell{
@@ -96,4 +96,14 @@ th, td {
 .buttom_cell{
     border-bottom-left-radius:18px;
     border-bottom-right-radius:18px;
+}
+.title{
+    margin-top: -40px;
+    margin-bottom: -20px;
+    padding: 1px;
+    font-family: 'Sigmar One', cursive;
+    text-align: center;
+    font-size: 100px;
+    color: hsl(49, 36%, 15%);
+    text-shadow: 1px 1px 2px rgb(252, 164, 2), 0 0 25px blue, 0 0 5px darkblue;
 }
