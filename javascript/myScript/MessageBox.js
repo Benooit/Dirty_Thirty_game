@@ -19,7 +19,8 @@ $(document).ready(() => {
     let endOfTurn_msg = {msg:" Vous avez terminer votre tour ! ",color:yellow};
     let shakeAllDices_msg = {msg:" Vous devez brasser TOUTES les dés ! ",color:red};
     let pointsToSteel_msg = {msg:" lol, something went wrong ",color:yellow};
-    let gameOver_msg = {msg:" Merci d'avoir joué !  ",color:green};
+    let gameOver_msg = {msg:"Vous êtes éliminé, Merci d'avoir joué !  ",color:red};
+    let gameOverAndPtsToSteel_msg = {msg:"Vous êtes éliminé, et enlever X points à votre prochain adversaire !  ",color:red};
     
     var Messages = {
         "welcome_msg":welcome_msg,
@@ -30,7 +31,8 @@ $(document).ready(() => {
         "endOfTurn_msg":endOfTurn_msg,
         "shakeAllDices_msg":shakeAllDices_msg,
         "pointsToSteel_msg":pointsToSteel_msg,
-        "gameOver_msg":gameOver_msg
+        "gameOver_msg":gameOver_msg,
+        "gameOverAndPtsToSteel_msg":gameOverAndPtsToSteel_msg
     };    
 
     //Creation of the message box and appening of it in the first state of the game.
@@ -67,7 +69,13 @@ $(document).ready(() => {
                 msg.msg = "Voux pouvez dérober " +
                   pointsToSteel +
                   ((pointsToSteel>1)?" points":" point")  +
-                   "  à votre adversaire !";    
+                   "  à votre prochain adversaire !";    
+            }
+            if (msg==gameOverAndPtsToSteel_msg) {
+                msg.msg = "Vous êtes éliminé, et enlever " +
+                  (pts*-1) +
+                  (((pts*-1)>1)?" points":" point")  +
+                   "  à votre prochain adversaire !";    
             }
             
             if (msg==removedPts_msg) {

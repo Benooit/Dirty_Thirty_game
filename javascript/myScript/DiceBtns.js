@@ -2,14 +2,10 @@
 $(document).ready(function () {
 
     var buttonQty = $(".diceContainer").length;
-    //alert(buttonQty);
+
     DiceButtonMaker(buttonQty);
     ShakeBtnMaker();
-    //GoalButtonMaker();
-
-    //var divVal = document.getElementById("Goal");
-    //divVal.setAttribute("data-value", 4);
-    //alert($("#Goal").attr("data-value"));
+        
 });
 
 function DiceButtonMaker(buttonQty) {
@@ -17,7 +13,7 @@ function DiceButtonMaker(buttonQty) {
     for (let i = 1; i <= buttonQty; i++) {
         var btnSection = document.createElement("section");
         $(btnSection).attr({ class: "btnSection" });
-        var button = $('<input/>').attr({ type: 'button', name: 'Button_'+i, id:'Btn_'+i,  class: 'dicesBtns buttonUp', value: 'KEEP' });
+        var button = $('<input/>').attr({ type: 'button', name: 'Button_'+i, id:'Btn_'+i,  class: 'dicesBtns buttonUp', value: 'conserver' });
         $(button).attr("data-frozen", false);      
         AttachDiceButtonEvent(button);
         $(btnSection).append(button);
@@ -35,19 +31,6 @@ function ShakeBtnMaker() {
     document.getElementById("ShakeButton").append(div);
 }
 
-
-function GoalButtonMaker() {
-    var GoalBtn = document.createElement("div");
-    $(GoalBtn).attr({ class: "display", id: "GoalDisplay" });
-    var GoalNbr = document.createElement("span");
-    $(GoalNbr).attr({ class: "numbers", id: "GoalNbr"});
-    $(GoalNbr).text("30");
-    GoalNbr.setAttribute("data-value", $(GoalNbr).text());
-    GoalNbr.setAttribute("data-frozen", false);
-    GoalBtn.append(GoalNbr);
-    AttachGoalBtnEvent(GoalBtn, GoalNbr);
-    (document.getElementById("Goal")).append(GoalBtn);
-}
 
 function AttachDiceButtonEvent(button) {
     $(button).hover(
@@ -93,24 +76,7 @@ function AttachShakeBtnEvent(shakeBtn) {
     
 }
 
-function AttachGoalBtnEvent(GoalDisplay, GoalNbr) {
-    $(GoalDisplay).click(function () {
-        if (GoalNbr.getAttribute("data-frozen")=="false") {
-            $(GoalNbr).slideUp(500, function () {
-                if ($(this).attr("data-value") == 30) {
-                    $(this).text(12);
-                    $(this).attr("data-value", 12);
-                }
-                else {
-                    $(this).text(30);
-                    $(this).attr("data-value", 30);
-                }
-            });
-            $(GoalNbr).slideDown();
-        }
-        
-    });
-}
+
 
 //--------------------------Buttons logic-------------//
 function ResetButtons() {

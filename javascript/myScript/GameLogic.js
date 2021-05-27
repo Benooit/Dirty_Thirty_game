@@ -19,6 +19,8 @@ var gameCnt = 0;
 let goalScore2bChk = false;
 var pointsToSteel = 0;
 var shotCnt = 0;
+var pts = 30;//points start at 30.
+var gameOver = false;
 var shakeBag = [];//Bag That contains the dices to be shaken.
 var toBeFrozed = [];//contains the dices to be saved.
 var frozenBag = [];//contains saved dices.
@@ -101,10 +103,16 @@ function Freeze() {
 
 function Shake() {//The one buton do-it-all.....maybe a bad idea but challenging.
     
+    if (gameOver) {
+        pts = 30;
+        $('#Pts').text(pts);
+        $("#Total").text("?");
+        gameOver = false;
+    }
     if (!turnStart) {
         if (!ptsRemovalChk) {
             ValidatePtsToRemove();
-            Shake();
+            if(!gameOver){Shake();}
             return;
         }
         if (goalScore2bChk) {
@@ -143,14 +151,15 @@ console.clear();
             }            
         }
         else {
-            Msg("keepOneDiceNotice_msg");//////////////
+            Msg("keepOneDiceNotice_msg");
         }        
     }
     else {        
-        Msg("removedPts_msg");//////////////
+        Msg("removedPts_msg");
         $('#ShakeBtn').val("Entrer");        
         turnStart = false//have to update comments..
         ResetGoalScore();
+        $("#Total").text("?");
     }    
 }
 
@@ -167,8 +176,20 @@ function ValidatePtsToRemove(){
 }
 
 function RemovedPts(ptsToRemove){ 
-    let pts = $('#Pts').text();
-    $('#Pts').text(pts-ptsToRemove);
+    pts = (pts-ptsToRemove);
+    $('#Pts').text(pts);
+    if (pts<0) {
+        Msg("gameOverAndPtsToSteel_msg");
+        Reset();
+        gameOver = true;
+       $('#ShakeBtn').val("Recommencer");
+    }
+    else if (pts == 0) {
+        Msg("gameOver_msg");
+        Reset();
+        gameOver = true;
+       $('#ShakeBtn').val("Recommencer");
+    }
 }
 
 function Reset(){
@@ -184,13 +205,14 @@ function Reset(){
 }
 
 function FinalMove(){
-    let pts = $('#Pts').text();
+    
     let dicesTotal = $("#Total").text();
     let goalScore = $("#Goalscore").attr("data-value");
     switch ((parseInt(goalScore))) {
         case 12:
             if (dicesTotal>=12) {
-                $('#Pts').text(pts-(dicesTotal-12));
+                pts = (pts-(dicesTotal-12));
+                $('#Pts').text(pts);
                 Msg("endOfTurn_msg");
             }
             else if(dicesTotal<12){
@@ -201,7 +223,8 @@ function FinalMove(){
             break;
         case 30:
             if (dicesTotal<=30) {
-                $('#Pts').text(pts-(30-dicesTotal));
+                pts = (pts-(30-dicesTotal));
+                $('#Pts').text(pts);
                 Msg("endOfTurn_msg");
             }
             else if(dicesTotal>30){
@@ -214,7 +237,14 @@ function FinalMove(){
             console.log("goalScore not valid in FinalMove()")
             break;
     }
+    
     Reset();
+
+    if (pts<1) {
+       Msg("gameOver_msg");
+       gameOver = true;
+       $('#ShakeBtn').val("Recommencer");
+    }
 }
 
 function DiceAnimOver() {    
