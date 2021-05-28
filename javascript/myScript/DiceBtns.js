@@ -39,7 +39,7 @@ function ShakeBtnMaker() {
         class: 'dicesBtns buttonUp',
         value: 'GO'
     });
-    $(shakeBtn).attr("data-frozen", false);
+    $(shakeBtn).attr("data-enable", false);
     AttachShakeBtnEvent(shakeBtn);
     div.append(shakeBtn);
     document.getElementById("ShakeButton").append(div);
@@ -82,7 +82,7 @@ function AttachDiceButtonEvent(button) {
 
 function AttachShakeBtnEvent(shakeBtn) {
     $(shakeBtn).click(function () {
-        let frozed = $(shakeBtn).attr("data-frozen");
+        let frozed = $(shakeBtn).attr("data-enable");
         if (frozed == "false") {
             Shake();
         }

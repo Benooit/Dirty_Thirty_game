@@ -122,14 +122,14 @@ $(document).ready(() => {
         $(noticeBox).append(noticeDiv);
         $(noticeBox).slideUp(1);
         $("#MessageBox").append(noticeBox);
-        $("#ShakeBtn").attr("data-frozen", true); 
+        $("#ShakeBtn").attr("data-enable", true); 
         noticeSpan.textContent = notice;
         
         $(noticeBox).slideDown( 500,()=>{
             setTimeout(()=>{
                 $(noticeBox).slideUp(500,()=>{
                     noticeBox.remove();
-                    $("#ShakeBtn").attr("data-frozen", false); 
+                    $("#ShakeBtn").attr("data-enable", false); 
                 });
             },3000);
         });   

@@ -48,12 +48,12 @@
     }
 
     .cube div {
-        background: hsla(235, 100%, 49%, 0.77);
+        background: hsl(58deg 38% 92%);
         display: block;
         position: absolute;
          width: 125px;/* original 200px */
         height: 25px;/* riginal 100px */
-        border: 2px solid #ab1a1a;
+        border: 2px solid #000000;
         margin: 0 auto;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 500%;
@@ -66,7 +66,7 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    background: #fff;
+    background: rgb(0, 0, 0);
     border-radius: 15px;
 }
 

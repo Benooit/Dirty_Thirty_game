@@ -1,16 +1,17 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>DirtyThirtyGame</title>
-    <link rel="icon" href="../pics/blueDice.jpg" type="image/x-icon"><!--to get a browser tab icon-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Langar&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+<link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
     <link href="../css/DirtyThirtyGame.css" rel="stylesheet" />
     <link href="../css/Dice.css" rel="stylesheet" />
     <script type="text/javascript" src="../javascript/dependance/jquery-3.4.1.js"></script>
@@ -20,63 +21,60 @@
     <script type="text/javascript" src="../javascript/myScript/DiceBtns.js"></script>
     <script type="text/javascript" src="../javascript/myScript/MessageBox.js"></script>
     <script type="text/javascript" src="../javascript/myScript/GameLogic.js"></script>
-    <script type="text/javascript" src="../javascript/myScript/icon.js"></script>
-
+   
 </head>
-
-<body>
+<body>  
 
     <h1 class="title"> LE DIRTY THIRTY </h1>
 
     <div class="container" id="dices">
         <!-- @*The dices are appering here by js and div id*@ -->
         <!-- This have being done on the dev-branch-->
-
+        
     </div>
 
     <div class="container" id="buttonsDiv">
         <!-- @*All the buttons are appering here by js and div id**@ -->
     </div>
 
-    <div id="ShakeButton">
+    <div id="ShakeButton"> 
         <!-- @*Shake (or GO) button appear here by js and div id*@ -->
     </div>
 
-    <div id="MessageBox" class="container">
-        <!-- @*Message for the user appear here by js and div id*@  -->
+    <div id="MessageBox" class="container">        
+         <!-- @*Message for the user appear here by js and div id*@  -->
     </div>
 
-    <div class="container">
+    <div class="container" >        
         <div id="Goal">
             <!-- @*the goal number appear here by js and div id*@ -->
         </div>
 
-        <table id="PtsTable">
-            <thead>
-                <tr>
-                    <th class="top_left_cell ">Total dés actuel</th>
-                    <th class="top_right_cell">Total à atteindre</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="Total">?</td>
-                    <td id="Goalscore" data-value="0">?</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="2">Pointage</th>
-                </tr>
-                <tr>
-                    <td colspan="2" id="Pts" data-value="30" class="buttom_cell">30</td>
-                </tr>
-            </tfoot>
-        </table>
+            <table id="PtsTable">
+                <thead>
+                    <tr>                        
+                        <th class="top_left_cell ">Total dés actuel</th>
+                        <th class="top_right_cell">Total à atteindre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="Total">?</td>
+                        <td id="Goalscore" data-value="0">?</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>                        
+                        <th colspan="2" >Pointage</th>
+                    </tr>
+                    <tr>                        
+                        <td colspan="2" id="Pts" data-value="30" class="buttom_cell">30</td>
+                    </tr>
+                </tfoot>
+            </table>       
     </div>
-
-
+                                                                                  
+                                                                                  
 
 </body>
-
 </html>
