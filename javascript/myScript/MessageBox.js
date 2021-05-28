@@ -7,15 +7,16 @@ $(document).ready(() => {
 
     //for a easier use of color.
     let green = "hsla(120, 100%, 90%, 0.77)";
-    let blue = "hsla(235, 100%, 49%, 0.77)";
+    let blue =  "hsla(235, 100%, 49%, 0.77)";
     let yellow = "hsla(60, 100%, 70%, 0.77)";
     let red = "hsla(0, 100%, 50%, 0.77)";
+    let cornsilk = "rgb(255,248,220)";
 
-    let welcome_msg = {msg:" Bonjour, appuyer sur commencer pour commencer une partie ! ",color:blue};
+    let welcome_msg = {msg:" Bonjour, appuyer sur commencer pour commencer une partie ! ",color:cornsilk};
     let removedPts_msg = {msg:" Entrez le nombre de points à soustraire ! ",color:green};
     let lastCall_msg = {msg:" Choisissez votre mise ! ",color:yellow};
     let keepOneDiceNotice_msg = {msg:" Vous devez conserver au moins 1 dé ! ",color:red};
-    let keepOneAndGo_msg = {msg:" Conserver au moins 1 dé et brasser ! ",color:blue};
+    let keepOneAndGo_msg = {msg:" Conserver au moins 1 dé et brasser ! ",color:cornsilk};
     let endOfTurn_msg = {msg:" Vous avez terminer votre tour ! ",color:yellow};
     let shakeAllDices_msg = {msg:" Vous devez brasser TOUTES les dés ! ",color:red};
     let pointsToSteel_msg = {msg:" lol, something went wrong ",color:yellow};
@@ -43,7 +44,7 @@ $(document).ready(() => {
         $(msgBox).attr("class", "container");
         $(msgBox).width("85%");
         $(msgBox).height(75);
-        $(msgBox).css({ "text-align": "center","background-color": blue, "margin-top": "20px", "border-radius": "20px", "font-family":"'Langar', cursive", "font-size":"xx-large"});
+        $(msgBox).css({ "text-align": "center","background-color": blue, "margin-top": "20px", "border-radius": "20px","border":"solid 3px", "font-family":"'Langar', cursive", "font-size":"xx-large"});
         $(msgDiv).append(msgSpan);
         $(msgBox).append(msgDiv);
         $("#MessageBox").append(msgBox);//append in a already written Div in the HTML.
@@ -121,11 +122,17 @@ $(document).ready(() => {
         $(noticeBox).append(noticeDiv);
         $(noticeBox).slideUp(1);
         $("#MessageBox").append(noticeBox);
-        
+        $("#ShakeBtn").attr("data-frozen", true); 
         noticeSpan.textContent = notice;
+        
         $(noticeBox).slideDown( 500,()=>{
-            setTimeout(()=>{$(noticeBox).slideUp(500,()=>{
-                noticeBox.remove();});},3000) });   
+            setTimeout(()=>{
+                $(noticeBox).slideUp(500,()=>{
+                    noticeBox.remove();
+                    $("#ShakeBtn").attr("data-frozen", false); 
+                });
+            },3000);
+        });   
     }
             
             

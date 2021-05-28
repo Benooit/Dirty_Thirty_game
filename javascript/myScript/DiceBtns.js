@@ -1,20 +1,27 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     var buttonQty = $(".diceContainer").length;
 
     DiceButtonMaker(buttonQty);
     ShakeBtnMaker();
-        
+
 });
 
 function DiceButtonMaker(buttonQty) {
 
     for (let i = 1; i <= buttonQty; i++) {
         var btnSection = document.createElement("section");
-        $(btnSection).attr({ class: "btnSection" });
-        var button = $('<input/>').attr({ type: 'button', name: 'Button_'+i, id:'Btn_'+i,  class: 'dicesBtns buttonUp', value: 'conserver' });
-        $(button).attr("data-frozen", false);      
+        $(btnSection).attr({
+            class: "btnSection"
+        });
+        var button = $('<input/>').attr({
+            type: 'button',
+            name: 'Button_' + i,
+            id: 'Btn_' + i,
+            class: 'dicesBtns buttonUp',
+            value: 'conserver'
+        });
+        $(button).attr("data-frozen", false);
         AttachDiceButtonEvent(button);
         $(btnSection).append(button);
         $("#buttonsDiv").append(btnSection);
@@ -24,8 +31,15 @@ function DiceButtonMaker(buttonQty) {
 function ShakeBtnMaker() {
     var div = document.createElement("div");
     div.className = "container";
-    var shakeBtn = document.createElement("input");//$('<input/>').attr({ type: 'button', name: 'Shake_Btn', id: 'ShakeBtn', class: 'buttonUp', value: 'SHAKE' });
-    $(shakeBtn).attr({ type: 'button', name: 'Shake_Btn', id: 'ShakeBtn', class: 'dicesBtns buttonUp', value: 'GO' });
+    var shakeBtn = document.createElement("input");
+    $(shakeBtn).attr({
+        type: 'button',
+        name: 'Shake_Btn',
+        id: 'ShakeBtn',
+        class: 'dicesBtns buttonUp',
+        value: 'GO'
+    });
+    $(shakeBtn).attr("data-frozen", false);
     AttachShakeBtnEvent(shakeBtn);
     div.append(shakeBtn);
     document.getElementById("ShakeButton").append(div);
@@ -34,8 +48,12 @@ function ShakeBtnMaker() {
 
 function AttachDiceButtonEvent(button) {
     $(button).hover(
-        function () { $(this).addClass('buttonHover') },
-        function () { $(this).removeClass('buttonHover') }
+        function () {
+            $(this).addClass('buttonHover')
+        },
+        function () {
+            $(this).removeClass('buttonHover')
+        }
     );
 
     $(button).click(function () {
@@ -44,15 +62,14 @@ function AttachDiceButtonEvent(button) {
             var cubeNbr = btnId.substr(4);
             var freezeState = $("#cube_" + cubeNbr).attr("data-frozen");
 
-            if (freezeState==="false"){
+            if (freezeState === "false") {
                 if ($(this).attr('class').match('buttonUp')) {
                     if (removeFromShakeBag("cube_" + cubeNbr)) {
                         $(this).removeClass('buttonUp');
                         $(this).addClass('buttonDn');
                     }
-                
-                }
-                else if ($(this).attr('class').match('buttonDn')) {
+
+                } else if ($(this).attr('class').match('buttonDn')) {
                     if (addToShakeBag("cube_" + cubeNbr)) {
                         $(this).removeClass('buttonDn');
                         $(this).addClass('buttonUp');
@@ -65,15 +82,20 @@ function AttachDiceButtonEvent(button) {
 
 function AttachShakeBtnEvent(shakeBtn) {
     $(shakeBtn).click(function () {
-        if (true) {///---------condition to implement ! (should be lock wile noticing)
+        let frozed = $(shakeBtn).attr("data-frozen");
+        if (frozed == "false") {
             Shake();
         }
     });
     $(shakeBtn).hover(
-        function () { $(this).addClass('buttonHover') },
-        function () { $(this).removeClass('buttonHover') }
+        function () {
+            $(this).addClass('buttonHover')
+        },
+        function () {
+            $(this).removeClass('buttonHover')
+        }
     );
-    
+
 }
 
 
@@ -87,10 +109,3 @@ function ResetButtons() {
     }
 
 }
-
-
-
-
-
-
-
