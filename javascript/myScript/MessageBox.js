@@ -41,10 +41,8 @@ $(document).ready(() => {
     let msgBox = document.createElement("div");
     let msgDiv = document.createElement("div");
     function MsgBoxMaker() {
-        $(msgBox).attr("class", "container");
+        $(msgBox).attr("class", "container msgBox");
         $(msgBox).width("85%");
-        $(msgBox).height(75);
-        $(msgBox).css({ "text-align": "center","background-color": blue, "margin-top": "20px", "border-radius": "20px","border":"solid 3px", "font-family":"'Langar', cursive", "font-size":"xx-large"});
         $(msgDiv).append(msgSpan);
         $(msgBox).append(msgDiv);
         $("#MessageBox").append(msgBox);//append in a already written Div in the HTML.
