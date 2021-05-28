@@ -27,12 +27,10 @@
 }
 
 .buttonUp {
-
     width: 160px;
     height: 50px;
-
-    color: white;
-    background-color: hsla(228, 95%, 48%, 0.93);
+    color: rgb(255, 255, 255);
+    background-color: hsl(220deg 28% 29% / 61%);
 
     box-shadow: 5px 5px 5px 5px black;
 }
@@ -48,8 +46,8 @@
 .buttonDn {
     width: 155px;
     height: 44px;
-    color: red;
-    background-color: hsl(227, 94%, 48%);
+    color: hsla(100,100%,50%,1);
+    background-color:  hsla(220, 29%, 20%, .84);
     box-shadow: 2px 2px 3px 3px black;
 }
 
@@ -57,7 +55,7 @@
     /* width: 198px;
     height: 73px; */
     color: black;
-    background-color: hsla(228, 95%, 48%, 0.93);
+    background-color: hsl(220deg 28% 29% / 86%);
     box-shadow: 2px 2px 5px 5px black;
 }
 
@@ -121,5 +119,26 @@ td {
     text-align: center;
     font-size: 100px;
     color: hsl(49, 36%, 15%);
-    text-shadow: 1px 1px 2px rgb(252, 164, 2), 0 0 25px blue, 0 0 5px darkblue;
+    text-shadow: 1px 1px 2px rgb(252, 164, 2), 0 0 25px rgb(255, 238, 0), 0 0 5px darkblue;
+}
+
+.goalBtn{
+    background-color: rgba(255, 248, 220, 0.568);
+    padding-left:10px;
+    padding-right:10px;
+    border:solid;
+    border-radius: 20px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.copywright {
+    position: fixed;
+    bottom: 0;
+    float: left;
+    position: absolute;
+    background-color: rgba(255, 248, 220, 0.562);
+    border-radius: 20px;
+padding-right: 1em;
+margin-bottom: 1em;
 }

@@ -6,6 +6,8 @@
 #My own ignored files...
 *.orig
 dependance/
+pics/
+.gitignore
 
 # User-specific files
 *.rsuser

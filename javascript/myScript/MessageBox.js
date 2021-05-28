@@ -19,7 +19,7 @@ $(document).ready(() => {
     let keepOneAndGo_msg = {msg:" Conserver au moins 1 dé et brasser ! ",color:cornsilk};
     let endOfTurn_msg = {msg:" Vous avez terminer votre tour ! ",color:yellow};
     let shakeAllDices_msg = {msg:" Vous devez brasser TOUTES les dés ! ",color:red};
-    let pointsToSteel_msg = {msg:" lol, something went wrong ",color:yellow};
+    let pointsToSteel_msg = {msg:" lol, something went wrong ",color:yellow};//message edited in Msg()
     let gameOver_msg = {msg:"Vous êtes éliminé, Merci d'avoir joué !  ",color:red};
     let gameOverAndPtsToSteel_msg = {msg:"Vous êtes éliminé, et enlever X points à votre prochain adversaire !  ",color:red};
     
@@ -91,13 +91,13 @@ $(document).ready(() => {
             if (msg==lastCall_msg) {
                 //Creation of the goal score buttons (spans).
                 let span30 = document.createElement("span");
-                span30.innerText = " 30 ou plus ";
+                span30.innerText = " 30 ou plus";
                 $(span30).attr({"class":"goalBtn","data-value":30});
-                $(span30).css({"padding-left":"10px","padding-right":"10px","border":"solid","border-radius": "20px", "margin-left":"10px", "margin-right":"10px"});
+                //$(span30).css({"padding-left":"10px","padding-right":"10px","border":"solid","border-radius": "20px", "margin-left":"10px", "margin-right":"10px"});
                 let span12 = document.createElement("span");
-                span12.innerText = " 12 ou moins ";
+                span12.innerText = "12 ou moins ";
                 $(span12).attr({"class":"goalBtn","data-value":12});
-                $(span12).css({"padding-left":"10px","padding-right":"15px","border":"solid","border-radius": "20px", "margin-left":"10px", "margin-right":"10px"});
+                //$(span12).css({"padding-left":"10px","padding-right":"15px","border":"solid","border-radius": "20px", "margin-left":"10px", "margin-right":"10px"});
                 //Appending of the extra spans...(Will be removed when another message take place.)
                 $(msgDiv).append(span30);
                 $(msgDiv).append("ou");
