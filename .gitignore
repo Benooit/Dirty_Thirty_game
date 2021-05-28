@@ -5,8 +5,8 @@
 
 #My own ignored files...
 *.orig
-dependance/
-pics/
+[Dd]ependance/
+[Pp]ics/
 .gitignore
 
 # User-specific files
