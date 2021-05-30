@@ -110,7 +110,7 @@ function AttachShakeBtnEvent(shakeBtn) {
 function AttachHoverEvent(button) {
     $(button).hover(
         function () {
-            if ($(this).attr("data-frozen") == "false" || $(this).attr("data-enable") == "false") {
+            if ($(this).attr("data-frozen") == "false" && !$(this).hasClass("dicesBtnsDisable") || $(this).attr("data-enable") == "true") {
                 $(this).addClass('buttonHover');
                 setTimeout(() => {
                     $(this).removeClass('buttonHover');
