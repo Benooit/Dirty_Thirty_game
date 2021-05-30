@@ -1,9 +1,22 @@
 ﻿$(document).ready(function () {
 
     var buttonQty = $(".diceContainer").length;
-
     DiceButtonMaker(buttonQty);
     ShakeBtnMaker();
+    document.addEventListener("keyup", function (event) {
+        if ((event.key).toLowerCase() =="enter") {            
+            // Cancel the default action, if needed, but don't work.
+            event.preventDefault();
+            // Trigger the button                         
+            $("#ShakeBtn").click();
+        }
+    });
+    $(document).keydown(function (e) { 
+        e.preventDefault();
+    });
+    $(document).keypress(function (e) { 
+        e.preventDefault();
+    });
 
 });
 
@@ -18,8 +31,9 @@ function DiceButtonMaker(buttonQty) {
             type: 'button',
             name: 'Button_' + i,
             id: 'Btn_' + i,
-            class: 'dicesBtns buttonUp',
-            value: 'conserver'
+            class: 'dicesBtns dicesBtnsUp',
+            value: 'conserver',
+            tabindex:-1
         });
         $(button).attr("data-frozen", false);
         AttachDiceButtonEvent(button);
@@ -36,76 +50,84 @@ function ShakeBtnMaker() {
         type: 'button',
         name: 'Shake_Btn',
         id: 'ShakeBtn',
-        class: 'dicesBtns buttonUp',
-        value: 'GO'
+        class: 'dicesBtns dicesBtnsUp',
+        value: 'GO',
+        tabindex:-1
     });
-    $(shakeBtn).attr("data-enable", false);
+    $(shakeBtn).attr("data-enable", true);
     AttachShakeBtnEvent(shakeBtn);
     div.append(shakeBtn);
-    document.getElementById("ShakeButton").append(div);
+    document.getElementById("ShakeBtnDiv").append(div);
 }
 
 
 function AttachDiceButtonEvent(button) {
-    $(button).hover(
-        function () {
-            $(this).addClass('buttonHover')
-        },
-        function () {
-            $(this).removeClass('buttonHover')
-        }
-    );
 
-    $(button).click(function () {
+    let btnId = $(button).attr("id");
+    let cubeNbr = btnId.substr(btnId.length - 1);
+
+    $(button).click(function (e) {
         if ($(this).attr("data-frozen") == "false") {
-            var btnId = $(this).attr("id");
-            var cubeNbr = btnId.substr(4);
-            var freezeState = $("#cube_" + cubeNbr).attr("data-frozen");
+            let freezeState = $("#cube_" + cubeNbr).attr("data-frozen");
 
             if (freezeState === "false") {
-                if ($(this).attr('class').match('buttonUp')) {
+                if ($(this).attr('class').match('dicesBtnsUp')) {
                     if (removeFromShakeBag("cube_" + cubeNbr)) {
-                        $(this).removeClass('buttonUp');
-                        $(this).addClass('buttonDn');
+                        $(this).removeClass('dicesBtnsUp');
+                        $(this).addClass('dicesBtnsDn');
                     }
 
-                } else if ($(this).attr('class').match('buttonDn')) {
+                } else if ($(this).attr('class').match('dicesBtnsDn')) {
                     if (addToShakeBag("cube_" + cubeNbr)) {
-                        $(this).removeClass('buttonDn');
-                        $(this).addClass('buttonUp');
+                        $(this).removeClass('dicesBtnsDn');
+                        $(this).addClass('dicesBtnsUp');
                     }
                 }
             }
         }
     });
+
+    AttachHoverEvent(button);
+    LinkDiceToBtn(button, ($("#cube_" + cubeNbr).get()))
+}
+
+function LinkDiceToBtn(button, dice) {
+    $(dice).click(() => {
+        button.click();
+    })
 }
 
 function AttachShakeBtnEvent(shakeBtn) {
-    $(shakeBtn).click(function () {
-        let frozed = $(shakeBtn).attr("data-enable");
-        if (frozed == "false") {
+    $(shakeBtn).click(()=> {
+        let enable = $(shakeBtn).attr("data-enable");
+        if (enable == "true") {
             Shake();
         }
     });
-    $(shakeBtn).hover(
-        function () {
-            $(this).addClass('buttonHover')
-        },
-        function () {
-            $(this).removeClass('buttonHover')
-        }
-    );
-
+    AttachHoverEvent(shakeBtn);    
 }
 
-
+function AttachHoverEvent(button) {
+    $(button).hover(
+        function () {
+            if ($(this).attr("data-frozen") == "false" || $(this).attr("data-enable") == "false") {
+                $(this).addClass('buttonHover');
+                setTimeout(() => {
+                    $(this).removeClass('buttonHover');
+                }, 1000);
+            }
+        },
+        function () {
+            $(this).removeClass('buttonHover');
+        }
+    );
+}
 
 //--------------------------Buttons logic-------------//
 function ResetButtons() {
     var buttons = document.getElementsByClassName("dicesBtns");
     for (btn of buttons) {
-        $(btn).removeClass('buttonDn');
-        $(btn).addClass('buttonUp');
+        $(btn).removeClass('dicesBtnsDn');
+        $(btn).addClass('dicesBtnsUp');
     }
-
 }

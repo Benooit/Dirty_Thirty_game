@@ -27,7 +27,7 @@ function DiceMaker(diceQty) {
 
             var face = document.createElement("div");
             face.className = facesClassNames[i];
-
+            $(face).addClass('face');//added to manipulate color.
             for (dot of Dotmaker(i + 1)) { //add 1 to y to match the quantity of dots.
                 face.append(dot);
             }
@@ -46,6 +46,7 @@ function DiceMaker(diceQty) {
             document.dispatchEvent(animFinished);
             console.log("transitionend for cube_" + i);
         }, true);
+
         diceSection.append(cubeDiv);
         $("#dices").append(diceSection); //insert the diceSections in your div/section of choice to append all dices. 
     }

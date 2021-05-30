@@ -26,24 +26,28 @@
     margin: auto;
 }
 
-.buttonUp {
-    width: 160px;
-    height: 50px;
-    color: rgb(255, 255, 255);
-    background-color: hsl(220deg 28% 29% / 61%);
-
-    box-shadow: 5px 5px 5px 5px black;
+#ShakeBtnDiv{
+    height: 62px;
 }
-
 .dicesBtns {
     font-family: 'Langar', cursive;
     margin: auto;
     font-size: x-large;
     border-radius: 20px;
     margin-top: 10px;
+    background-color: hsl(220deg 28% 29% / 61%);
+    box-shadow: 5px 5px 5px 5px black;
 }
 
-.buttonDn {
+.dicesBtnsUp {
+    width: 160px;
+    height: 50px;
+    color: rgb(255, 255, 255);
+    background-color: hsl(220deg 28% 29% / 61%);
+    box-shadow: 5px 5px 5px 5px black;
+}
+
+.dicesBtnsDn {
     width: 155px;
     height: 44px;
     color: hsla(100,100%,50%,1);
@@ -51,24 +55,17 @@
     box-shadow: 2px 2px 3px 3px black;
 }
 
+.dicesBtnsDisable {    
+    color: rgb(66, 92, 53);    
+}
+
 .buttonHover {
-    /* width: 198px;
-    height: 73px; */
+    width: 158px;
+    height: 48px;
     color: black;
     background-color: hsl(220deg 28% 29% / 86%);
     box-shadow: 2px 2px 5px 5px black;
 }
-
-/* .display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 250px;
-    width: 200px;
-    margin: 10px;
-    border: 5px solid hsla(228, 95%, 48%, 0.93);
-    border-radius: 20px;
-} */
 
 .numbers {
     font-family: 'Langar', cursive;
@@ -82,10 +79,11 @@ td {
 }
 
 table {
+    table-layout: fixed;
     max-height: 400px;
-    width: 1000px;
+    width: 55%;
     margin: 5px;
-    margin-top: 25px;
+    margin-top: 15px;
     border-radius: 20px;
     border:solid 3px;
     background-color: rgb(255, 248, 220);
@@ -123,17 +121,42 @@ td {
 }
 
 .goalBtn{
-    background-color: rgba(255, 248, 220, 0.568);
-    padding-left:10px;
-    padding-right:10px;
+    font-family: 'Langar', cursive;
+    font-size: xx-large;
+    background-color: hsl(22deg 28% 29% / 61%);
+    box-shadow: 2px 1px 5px 2px black;
+    width: 200px;
+    height: 50px;
+    margin-right: 0.2em;
+    margin-left: 0.2em;
     border:solid;
     border-radius: 20px;
-    margin-left:10px;
-    margin-right:10px;
+    
+}
+.goalBtnDn{
+    width: 190px;
+    height: 48px;
+    margin-right: 16px;
+    background-color: hsla(60, 100%, 70%, 0.77);
+    box-shadow: 1px 1px 2px 1px black;
+}
+.goalBtn:hover{
+    background-color: hsla(60, 43%, 49%, 0.77);
+    box-shadow: 1px 1px 3px 2px black;
+}
+
+#ptsToRemove_box {
+    height: 45px;
+    width: 50px;
+    font-family: 'Langar', cursive;
+    font-size: xx-large;
+    margin-left: 20px;
+    border-radius: 10px;
 }
 
 .msgBox {
     height: 2em;
+    width: 85%;
     text-align: center;
     background-color: rgb(255, 248, 220);
     margin-top: 20px;
@@ -150,6 +173,6 @@ td {
     position: absolute;
     background-color: rgba(255, 248, 220, 0.562);
     border-radius: 20px;
-padding-right: 1em;
-margin-bottom: 1em;
+    padding-right: 1em;
+    margin-bottom: 1em;
 }
