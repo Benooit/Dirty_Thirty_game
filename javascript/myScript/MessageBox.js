@@ -93,12 +93,17 @@ $(document).ready(() => {
 
             if (msg == removedPts_msg) {
                 //Appending of the extra of remove points message...(Will be removed when another message take place.)
-                $(msgDiv).append(CreateNumBox());
+                let div = document.createElement("div");
+                $(div).append(CreateNumBox());
+                $(msgDiv).append(div);
             }
 
-            if (msg == lastCall_msg) {
+            if (msg == lastCall_msg) {                
                 //Appending of the extra buttons for bet...(Will be removed when another message take place.)
-                $(msgDiv).append(CreateBtn(30)).append("ou").append(CreateBtn(12));
+                let div = document.createElement("div");
+                $(div).append(CreateBtn(30)).append("ou").append(CreateBtn(12));
+                
+                $(msgDiv).append(div);
                 $("#ShakeBtn").addClass("dicesBtnsDisable");//showing less of the shake button.
             }
 
@@ -150,11 +155,13 @@ $(document).ready(() => {
     function CreateNumBox() { //--For "removedPts_msg" message.
         let numberBox = document.createElement("input");
         $(numberBox).attr({
-            value: 0,
-            type: 'number',
             name: 'ptsToRemove_box',
             id: 'ptsToRemove_box',
             class: 'NumBox',
+            type: 'number',
+            pattern:"[0-9]",
+            inputmode:"numeric",
+            value: 0,
             min: 0,
             max: 6 //---OTHERWYSW WITH BONUS GAME IT HAVE TO BE 36
         });

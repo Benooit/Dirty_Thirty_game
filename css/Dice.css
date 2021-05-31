@@ -182,3 +182,196 @@
     top: 80px;
     left: 80px;
 }
+
+@media only screen and (max-width: 1px) {
+    .cube .front {
+        transform: translateZ(21px);
+        /* original 100px */
+    }
+    
+    .cube .back {
+        transform: rotateX(-180deg) translateZ(21px);
+        /* original 100px */
+    }
+    
+    .cube .right {
+        transform: rotateY(90deg) translateZ(21px);
+        /* original 100px */
+    }
+    
+    .cube .left {
+        transform: rotateY(-90deg) translateZ(21px);
+        /* original 100px */
+    }
+    
+    .cube .top {
+        transform: rotateX(90deg) translateZ(21px);
+        /* original 100px */
+    }
+    
+    .cube .bottom {
+        transform: rotateX(-90deg) translateZ(21px);
+        /* original 100px */
+    }
+    
+    .diceContainer {
+        width: 16%;
+        height: 100px;
+        position: relative;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /*-65px auto 40px;   /*original safe values; 0 auto 40px;*/
+        /*border: 1px solid #FFF;*/
+        perspective: 1000px;
+        perspective-origin: 50% 100%;
+    }
+    
+    .cube {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: transform 6s;
+    }
+    
+    .cube:hover {
+        cursor: pointer;
+    }
+    
+    .cube div {
+        background: hsla(58, 38%, 92%, 1);
+        display: block;
+        position: absolute;
+        width: 40px;
+        /* original 200px */
+        height: 40px;
+        /* riginal 100px */
+        border: 2px solid #000000;
+        margin:  auto;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 500%;
+        text-align: center;
+        padding: 0px 0;    
+    }
+    
+    .dot {
+        display:block;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: rgb(0, 0, 0);
+        border-radius: 15px;
+    }
+    
+    .front .dot1 {
+        top: 15px;
+        left: 15px;
+    
+    }
+    
+    .back .dot1 {
+        top: 5px;
+        left: 5px;
+    }
+    
+    .back .dot2 {
+        top: 25px;
+        left: 25px;
+    }
+    
+    .right .dot1 {
+        top: 5px;
+        left: 5px;
+    }
+    
+    .right .dot2 {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .right .dot3 {
+        top: 25px;
+        left: 2px;
+    }
+    
+    .left .dot1 {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .left .dot2 {
+        top: 15px;
+        left: 80px;
+    }
+    
+    .left .dot3 {
+        top: 80px;
+        left: 15px;
+    }
+    
+    .left .dot4 {
+        top: 80px;
+        left: 80px;
+    }
+    
+    .top .dot1 {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .top .dot2 {
+        top: 15px;
+        left: 80px;
+    }
+    
+    .top .dot3 {
+        top: 48px;
+        left: 48px;
+    }
+    
+    .top .dot4 {
+        top: 80px;
+        left: 15px;
+    }
+    
+    .top .dot5 {
+        top: 80px;
+        left: 80px;
+    }
+    
+    .bottom .dot1 {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .bottom .dot2 {
+        top: 15px;
+        left: 48px;
+    }
+    
+    .bottom .dot3 {
+        top: 15px;
+        left: 80px;
+    }
+    
+    .bottom .dot4 {
+        top: 80px;
+        left: 15px;
+    }
+    
+    .bottom .dot5 {
+        top: 80px;
+        left: 48px;
+    }
+    
+    .bottom .dot6 {
+        top: 80px;
+        left: 80px;
+    }
+}

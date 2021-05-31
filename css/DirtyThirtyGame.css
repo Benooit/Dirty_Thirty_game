@@ -3,11 +3,25 @@
     background-size:100vw 100vh;
 }
 
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#PlayBoard div{
+    
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.diceAndButtonDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
 }
 
 #dices {
@@ -16,8 +30,7 @@
 }
 
 #buttonsDiv {
-    /*margin-top:-50px;*/
-    height: 75px;
+    padding: auto;
 }
 
 .btnSection {
@@ -28,13 +41,15 @@
 }
 
 #ShakeBtnDiv{
-    height: 62px;
+    padding: auto;
+    height:55px ;
+   
 }
 
 .dicesBtns {
     font-family: 'Langar', cursive;
     margin: auto;
-    font-size: x-large;
+    font-size: 1.5em;
     border-radius: 20px;
     margin-top: 10px;
     background-color: hsl(220deg 28% 29% / 61%);
@@ -84,6 +99,7 @@ table {
     table-layout: fixed;
     max-height: 400px;
     width: 55%;
+    /* min-width: 25em; */
     margin: 5px;
     margin-top: 15px;
     border-radius: 20px;
@@ -94,7 +110,7 @@ table {
 th,
 td {
     font-family: 'Langar', cursive;
-    font-size: 35px;
+    font-size: 1.8em;
     text-align: center;
 }
 
@@ -117,7 +133,7 @@ td {
     padding: 1px;
     font-family: 'Sigmar One', cursive;
     text-align: center;
-    font-size: 75px;
+    font-size: 5em;
     color: hsl(49, 36%, 15%);
     text-shadow: 1px 1px 2px rgb(252, 164, 2), 0 0 25px rgb(255, 238, 0), 0 0 5px darkblue;
 }
@@ -157,6 +173,7 @@ td {
 }
 
 .msgBox {
+   
     height: 2em;
     width: 85%;
     text-align: center;
@@ -165,16 +182,83 @@ td {
     border-radius: 20px;
     border: solid 3px;
     font-family: 'Langar', cursive;
-    font-size: xx-large;
+    font-size: 2em;
+}
+.msgBox div{   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .copywright {
-    position: fixed;
-    bottom: 0;
-    float: left;
-    position: absolute;
+    
+    bottom: 0px;
+    position:fixed;
+    
     background-color: rgba(255, 248, 220, 0.562);
     border-radius: 20px;
     padding-right: 1em;
     margin-bottom: 1em;
+}
+
+@media only screen and (max-width: 1280px) {
+    body{
+        font-size: 0.8em;
+    }
+    
+    .title {
+        font-size: 2em;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .msgBox {
+        height: 4.3em;
+        /* width: 100%; */
+    }
+    
+    table{
+        table-layout:auto;
+        max-height: 400px;
+        /* width: 100%;        */
+    }
+    #PlayBoard div {
+        zoom:0.95;
+      }
+      
+    
+}
+
+@media only screen and (max-width: 1000px) {
+    .msgBox {
+        height: 4.3em;
+        width: 100%;
+    }
+    
+    table{
+        table-layout:auto;
+        max-height: 400px;
+        width: 100%;       
+    }
+    #PlayBoard div div{
+        flex-basis: 25%;
+      }
+}
+@media only screen and (max-width: 600px) {
+    #PlayBoard div{
+      zoom:0.89;
+    }
+    #PlayBoard div div{
+        flex-basis:auto;
+      }
+    .msgBox {   
+        zoom:0.8;
+    }
+}
+
+@media only screen and (min-width: 2200px) {
+    body{
+        zoom:1.8;
+    }
 }
