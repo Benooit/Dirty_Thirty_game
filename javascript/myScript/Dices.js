@@ -49,7 +49,9 @@ function DiceMaker(diceQty) {
 
         diceSection.append(cubeDiv);
         $("#dices").append(diceSection); //insert the diceSections in your div/section of choice to append all dices. 
+        Shaker(cubeDiv);
     }
+    
     ReFillShakeBag(); 
 }
 

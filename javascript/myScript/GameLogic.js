@@ -7,6 +7,7 @@ $(document).ready(() => {
         StartedAnim++;
     });
     $('#ShakeBtn').val("Commencer");
+    
 });
 //VERY IMPORTANT to be accessible from another .js file 
 //the function need to be outside $(document).ready. 
@@ -26,9 +27,9 @@ var frozenBag = []; //contains saved dices.
 var turnStart = true; //first shot of this round.
 var dices = [];
 dices = document.getElementsByClassName("cube");
-
 let finishedAnim = 0;
 let StartedAnim = 0;
+
 
 function AreAllAnimFinished() {
     //-----------------------------------------MAYBE PUT A TIMEOUT HERE------------------------------------------------
@@ -82,7 +83,7 @@ function removeFromShakeBag(cubeId) { //...id is received...object is spliced...
         if (index >= 0) {
             toBeFrozed.push((shakeBag.splice(index, 1))[0]);
             AddToTotalKept(cube);
-            if (toBeFrozed.length == dices.length) { //if all dices are selected...
+            if ((toBeFrozed.length+frozenBag.length) == dices.length) { //if all dices are selected...
                 $('#ShakeBtn').val("Terminer");
             }
             return true;
@@ -179,7 +180,7 @@ function Shake() { //The one button do-it-all.....maybe a bad idea but challengi
             if (shakeBag.length > 0) { //if there are dices to be shaken...
                 console.clear(); //to clear confusion,because all dices event are shown in console (transition start/end).
                 for (cube of shakeBag) {
-                    cube.setAttribute("data-value", Shaker(cube)); //shaking to dice cube return it's value.       
+                    Shaker(cube); //shaking to dice cube return it's value.       
                 }
 
                 $("#Total").text("?"); //no total value when dices are shaking...
@@ -315,3 +316,4 @@ function ResetGoalScore() {
     $("#Goalscore").html("?");
     $("#Goalscore").attr("data-value", 0);
 }
+

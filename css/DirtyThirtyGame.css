@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 #dices {
@@ -29,6 +30,7 @@
 #ShakeBtnDiv{
     height: 62px;
 }
+
 .dicesBtns {
     font-family: 'Langar', cursive;
     margin: auto;
